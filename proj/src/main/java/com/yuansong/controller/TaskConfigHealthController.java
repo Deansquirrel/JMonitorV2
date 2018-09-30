@@ -26,28 +26,28 @@ public class TaskConfigHealthController extends BaseConfigController<HealthTaskC
 	private BaseConfigService<HealthTaskConfig> mHealthTaskConfigService;
 
 	@RequestMapping(value="/List")
-	public ModelAndView healthTaskConfigList(Map<String, Object> model) {
-		logger.debug("TaskConfigHealthController healthTaskConfigList");
+	public ModelAndView configList(Map<String, Object> model) {
+		logger.debug("TaskConfigHealthController configList");
 		return new ModelAndView("TaskConfigHealthList", this.getListModel(model));
 	}
 	
 	
 	@RequestMapping(value="/Add",method=RequestMethod.GET)
-	public ModelAndView healthTaskConfigAdd(Map<String, Object> model) {
-		logger.debug("TaskConfigHealthController healthTaskConfigAdd");
+	public ModelAndView configAdd(Map<String, Object> model) {
+		logger.debug("TaskConfigHealthController configAdd");
 		return new ModelAndView("TaskConfigHealthAdd", this.getAddGetModel(model));
 	}
 	
 	@Transactional
 	@RequestMapping(value="/Add",method=RequestMethod.POST)
-	public ModelAndView healthTaskConfigAddAction(
+	public ModelAndView configAddAction(
 			@RequestParam("i-title") String title,
 			@RequestParam("i-remark") String remark,			
 			@RequestParam("i-cron") String cron,
 			@RequestParam("i-msgtitle") String msgTitle,
 			@RequestParam("i-msgcontent") String msgContent,
 			Map<String, Object> model) {
-		logger.debug("TaskConfigHealthController healthTaskConfigAddAction");
+		logger.debug("TaskConfigHealthController configAddAction");
 		
 		HealthTaskConfig config = new HealthTaskConfig();
 		config.setId(CommonFun.UUID());
@@ -62,10 +62,10 @@ public class TaskConfigHealthController extends BaseConfigController<HealthTaskC
 	
 	@Transactional
 	@RequestMapping(value="/Del",method=RequestMethod.POST)
-	public ModelAndView healthTaskConfigDelAction(
+	public ModelAndView configDelAction(
 			@RequestParam("i-id") String id,
 			Map<String, Object> model) {
-		logger.debug("TaskConfigHealthController healthTaskConfigDelAction");
+		logger.debug("TaskConfigHealthController configDelAction");
 		logger.debug(id);
 		
 		HealthTaskConfig config = new HealthTaskConfig();
@@ -75,8 +75,8 @@ public class TaskConfigHealthController extends BaseConfigController<HealthTaskC
 	}
 	
 	@RequestMapping(value="/Detail/{taskId}")
-	public ModelAndView healthTaskConfigDetail(@PathVariable String taskId, Map<String, Object> model) {
-		logger.debug("TaskConfigHealthController healthTaskConfigDetail - " + taskId);
+	public ModelAndView configDetail(@PathVariable String taskId, Map<String, Object> model) {
+		logger.debug("TaskConfigHealthController configDetail - " + taskId);
 		return new ModelAndView("TaskConfigHealthDetail", this.getDetailModel(model, taskId));
 	}
 

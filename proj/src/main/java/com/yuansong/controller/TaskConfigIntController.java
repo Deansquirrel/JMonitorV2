@@ -26,20 +26,20 @@ public class TaskConfigIntController extends BaseConfigController<IntTaskConfig>
 	private BaseConfigService<IntTaskConfig> mIntTaskConfigService;
 	
 	@RequestMapping(value="/List")
-	public ModelAndView intTaskConfigList(Map<String, Object> model) {
-		logger.debug("TaskConfigIntController intTaskConfigList");	
+	public ModelAndView configList(Map<String, Object> model) {
+		logger.debug("TaskConfigIntController configList");	
 		return new ModelAndView("TaskConfigIntList", this.getListModel(model));
 	}
 	
 	@RequestMapping(value="/Add",method=RequestMethod.GET)
-	public ModelAndView intTaskConfigAdd(Map<String, Object> model) {
-		logger.debug("TaskConfigIntController intTaskConfigAdd");
+	public ModelAndView configAdd(Map<String, Object> model) {
+		logger.debug("TaskConfigIntController configAdd");
 		return new ModelAndView("TaskConfigIntAdd", this.getAddGetModel(model));
 	}
 	
 	@Transactional
 	@RequestMapping(value="/Add",method=RequestMethod.POST)
-	public ModelAndView intTaskConfigAddAction(
+	public ModelAndView configAddAction(
 			@RequestParam("i-title") String title,
 			@RequestParam("i-remark") String remark,
 			@RequestParam("i-server") String server,
@@ -55,7 +55,7 @@ public class TaskConfigIntController extends BaseConfigController<IntTaskConfig>
 			@RequestParam("i-msgcontent") String msgContent,
 			Map<String, Object> model) {
 		
-		logger.debug("TaskConfigIntController intTaskConfigAddAction");
+		logger.debug("TaskConfigIntController configAddAction");
 		
 		IntTaskConfig config = new IntTaskConfig();
 		config.setId(CommonFun.UUID());
@@ -77,10 +77,10 @@ public class TaskConfigIntController extends BaseConfigController<IntTaskConfig>
 	
 	@Transactional
 	@RequestMapping(value="/Del",method=RequestMethod.POST)
-	public ModelAndView intTaskConfigDelAction(
+	public ModelAndView configDelAction(
 			@RequestParam("i-id") String id,
 			Map<String, Object> model) {
-		logger.debug("TaskConfigIntController intTaskConfigDelAction");
+		logger.debug("TaskConfigIntController configDelAction");
 		
 		IntTaskConfig config = new IntTaskConfig();
 		config.setId(id);
@@ -89,8 +89,8 @@ public class TaskConfigIntController extends BaseConfigController<IntTaskConfig>
 	}
 	
 	@RequestMapping(value="/Detail/{taskId}")
-	public ModelAndView intTaskConfigDetail(@PathVariable String taskId, Map<String, Object> model) {
-		logger.debug("TaskConfigIntController intTaskConfigDetail");	
+	public ModelAndView configDetail(@PathVariable String taskId, Map<String, Object> model) {
+		logger.debug("TaskConfigIntController configDetail");	
 		return new ModelAndView("TaskConfigIntDetail", this.getDetailModel(model, taskId));
 	}
 

@@ -36,25 +36,25 @@ public class NotifyConfigDingController extends BaseConfigController<DingNotifyC
 	}
 	
 	@RequestMapping(value="/List")
-	public ModelAndView dingMessageConfigList(Map<String, Object> model) {
-		logger.debug("NotifyConfigDingController dingMessageConfigList");
+	public ModelAndView configList(Map<String, Object> model) {
+		logger.debug("NotifyConfigDingController configList");
 		return new ModelAndView("MessageSenderConfigDingList", this.getListModel(model));
 	}
 	
 	@RequestMapping(value="/Add",method=RequestMethod.GET)
-	public ModelAndView dingMessageConfigAdd(Map<String, Object> model) {
-		logger.debug("NotifyConfigDingController dingMessageConfigAdd");
+	public ModelAndView configAdd(Map<String, Object> model) {
+		logger.debug("NotifyConfigDingController configAdd");
 		return new ModelAndView("MessageSenderConfigDingAdd", this.getAddGetModel(model));
 	}
 	
 	@Transactional
 	@RequestMapping(value="/Add",method=RequestMethod.POST)
-	public ModelAndView dingMessageConfigAddAction(
+	public ModelAndView configAddAction(
 			@RequestParam("i-title") String title,
 			@RequestParam("i-remark") String remark,
 			@RequestParam("i-robottoken") String robotToken,
 			Map<String, Object> model) {
-		logger.debug("NotifyConfigDingController dingMessageConfigAddAction");
+		logger.debug("NotifyConfigDingController configAddAction");
 		
 		DingNotifyConfig config = new DingNotifyConfig();
 		config.setId(CommonFun.UUID());
@@ -67,10 +67,10 @@ public class NotifyConfigDingController extends BaseConfigController<DingNotifyC
 	
 	@Transactional
 	@RequestMapping(value="/Del",method=RequestMethod.POST)
-	public ModelAndView webStateTaskConfigDelAction(
+	public ModelAndView configDelAction(
 			@RequestParam("i-id") String id,
 			Map<String, Object> model) {
-		logger.debug("NotifyConfigDingController webStateTaskConfigDelAction");
+		logger.debug("NotifyConfigDingController configDelAction");
 		logger.debug(id);
 		
 		DingNotifyConfig config = new DingNotifyConfig();
@@ -80,8 +80,8 @@ public class NotifyConfigDingController extends BaseConfigController<DingNotifyC
 	}
 	
 	@RequestMapping(value="/Detail/{taskId}")
-	public ModelAndView dingMessageConfigDetail(@PathVariable String taskId, Map<String, Object> model) {
-		logger.debug("NotifyConfigDingController webStateTaskConfigDetail - " + taskId);
+	public ModelAndView configDetail(@PathVariable String taskId, Map<String, Object> model) {
+		logger.debug("NotifyConfigDingController configDetail - " + taskId);
 		return new ModelAndView("MessageSenderConfigDingDetail", this.getDetailModel(model, taskId));
 	}
 }

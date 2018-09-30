@@ -35,20 +35,20 @@ public class TaskConfigJiraSearchController extends BaseConfigController<JiraSea
 	}
 	
 	@RequestMapping(value="/List")
-	public ModelAndView jiraSearchTaskConfigList(Map<String, Object> model) {
-		logger.debug("JiraSearchController jiraSearchTaskConfigList");
+	public ModelAndView configList(Map<String, Object> model) {
+		logger.debug("JiraSearchController configList");
 		return new ModelAndView("TaskConfigJiraSearchList", this.getListModel(model));
 	}
 	
 	@RequestMapping(value="/Add",method=RequestMethod.GET)
-	public ModelAndView jiraSearchTaskConfigAdd(Map<String, Object> model) {
-		logger.debug("JiraSearchController jiraSearchTaskConfigAdd");
+	public ModelAndView configAdd(Map<String, Object> model) {
+		logger.debug("JiraSearchController configAdd");
 		return new ModelAndView("TaskConfigJiraSearchAdd", this.getAddGetModel(model));
 	}
 	
 	@Transactional
 	@RequestMapping(value="/Add",method=RequestMethod.POST)
-	public ModelAndView jiraSearchConfigAddAction(
+	public ModelAndView configAddAction(
 			@RequestParam("i-title") String title,
 			@RequestParam("i-remark") String remark,
 			@RequestParam("i-server") String server,
@@ -57,7 +57,7 @@ public class TaskConfigJiraSearchController extends BaseConfigController<JiraSea
 			@RequestParam("i-pwd") String pwd,
 			@RequestParam("i-cron") String cron,
 			Map<String, Object> model) {
-		logger.debug("JiraSearchController jiraSearchConfigAddAction");
+		logger.debug("JiraSearchController configAddAction");
 		
 		JiraSearchTaskConfig config = new JiraSearchTaskConfig();
 		config.setId(CommonFun.UUID());
@@ -74,10 +74,10 @@ public class TaskConfigJiraSearchController extends BaseConfigController<JiraSea
 	
 	@Transactional
 	@RequestMapping(value="/Del",method=RequestMethod.POST)
-	public ModelAndView jiraSearchConfigDelAction(
+	public ModelAndView configDelAction(
 			@RequestParam("i-id") String id,
 			Map<String, Object> model) {
-		logger.debug("JiraSearchController jiraSearchConfigDelAction");
+		logger.debug("JiraSearchController configDelAction");
 		logger.debug(id);
 		
 		JiraSearchTaskConfig config = new JiraSearchTaskConfig();
@@ -87,8 +87,8 @@ public class TaskConfigJiraSearchController extends BaseConfigController<JiraSea
 	}
 	
 	@RequestMapping(value="/Detail/{taskId}")
-	public ModelAndView jiraSearchConfigDetail(@PathVariable String taskId, Map<String, Object> model) {
-		logger.debug("JiraSearchController jiraSearchConfigDetail - " + taskId);
+	public ModelAndView configDetail(@PathVariable String taskId, Map<String, Object> model) {
+		logger.debug("JiraSearchController configDetail - " + taskId);
 		return new ModelAndView("TaskConfigJiraSearchDetail", this.getDetailModel(model, taskId));
 	}
 	
