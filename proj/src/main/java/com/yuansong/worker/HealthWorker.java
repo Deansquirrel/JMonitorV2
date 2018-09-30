@@ -25,16 +25,24 @@ public class HealthWorker extends BaseWorkerAbstractImpl<HealthTaskConfig> {
 			logger.warn("HealthConfig is null");
 			return "HealthConfig is null";
 		}
-		String msg = taskConfig.getMsgContent();
-		if(!taskConfig.getMsgTitle().equals("")) {
-			msg = taskConfig.getMsgTitle() + "\n" + msg;
-		}
 		
-		if(!HealthRecorder.isHealth()) {
-			msg = msg + "\n" + "\n" + HealthRecorder.getHealthWarnMsg();
-		}
-		
-		return DateTool.getDateStr() + "\n" + CommonFun.getInternetIp() + "\n" + msg;
+		StringBuilder sb = new StringBuilder();
+		sb.append(DateTool.getDateStr());
+		sb.append("\n");
+		sb.append(CommonFun.getInternetIp());
+    	if(!taskConfig.getMsgTitle().equals("")) {
+    		sb.append("\n");
+    		sb.append(taskConfig.getMsgTitle());
+    	}
+    	if(!taskConfig.getMsgContent().equals("")) {
+    		sb.append("\n");
+    		sb.append(taskConfig.getMsgContent());
+    	}
+    	if(!HealthRecorder.isHealth()) {
+    		sb.append("\n").append("\n");
+    		sb.append(HealthRecorder.getHealthWarnMsg());
+		}		
+		return sb.toString();
 	}
 
 }
