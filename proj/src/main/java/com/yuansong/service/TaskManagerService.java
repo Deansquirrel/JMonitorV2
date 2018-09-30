@@ -284,7 +284,8 @@ public class TaskManagerService {
 			@Override
 			public void getDelList(List<String> list) {
 				for(String id : list) {
-					logger.info("del old DingNotifyConfig - " + mGson.toJson(configMap.get(id)));
+					Config config = configMap.get(id);
+					logger.info("del old " +  config.getClass().getSimpleName() +  " - " + mGson.toJson(configMap.get(id)));
 					configMap.remove(id);
 				}
 				if(list.size() > 0) {

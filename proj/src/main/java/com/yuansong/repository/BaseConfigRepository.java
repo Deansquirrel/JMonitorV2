@@ -2,19 +2,27 @@ package com.yuansong.repository;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 //import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.google.gson.Gson;
 import com.yuansong.pojo.BaseConfig;
 
 public abstract class BaseConfigRepository<T extends BaseConfig> {
 	
-//	private final Logger logger = Logger.getLogger(BaseConfigRepository.class);
+	private final Logger logger = Logger.getLogger(BaseConfigRepository.class);
+	
+	private Gson mGson = null;
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	public BaseConfigRepository() {
+		mGson = new Gson();
+	}
 	
 	protected abstract String getGetSql();
 	protected abstract String getGetListSql();
@@ -58,6 +66,7 @@ public abstract class BaseConfigRepository<T extends BaseConfig> {
 	}
 	
 	public int addConfig(T config) {
+		logger.info("AddConfig - " + mGson.toJson(config));
 		int row = -1;
 		try {
 			row = jdbcTemplate.update(getAddSql(), getAddParams(config));
@@ -69,6 +78,7 @@ public abstract class BaseConfigRepository<T extends BaseConfig> {
 	}
 	
 	public int delConfig(T config) {
+		logger.info("AddConfig - " + mGson.toJson(config));
 		int row = -1;
 		try {
 			row =  jdbcTemplate.update(getDelSql(), getDelParams(config));
