@@ -62,6 +62,10 @@ public class WebStateWorker extends BaseWorkerAbstractImpl<WebStateTaskConfig> {
         		sb.append(taskConfig.getMsgTitle());
         		sb.append("\n");
         	}
+        	if(!taskConfig.getMsgContent().equals("")) {
+        		sb.append(taskConfig.getMsgContent());
+        		sb.append("\n");
+        	}
         	sb.append(taskConfig.getUrl());
         	sb.append("\n");
         	sb.append("网址打开异常");
