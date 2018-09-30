@@ -8,22 +8,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import com.google.gson.Gson;
 import com.yuansong.pojo.BaseConfig;
 import com.yuansong.service.BaseConfigService;
 
 public abstract class BaseConfigController<T extends BaseConfig> {
 	
-	private final Logger logger = Logger.getLogger(BaseConfigController.class);
+//	private final Logger logger = Logger.getLogger(BaseConfigController.class);
 
 	private Gson mGson = new Gson();
 	
 	protected Map<String, Object> getListModel(Map<String, Object> model) {
-		
-		logger.debug("BaseTaskConfigController getListModel");
-		
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		Map<String, String> listItem;
 		List<T> configList = getConfigService().getConfigList();
@@ -58,10 +53,7 @@ public abstract class BaseConfigController<T extends BaseConfig> {
 		return model;
 	}
 	
-	protected Map<String, Object> getAddGetModel(Map<String, Object> model) {
-		
-		logger.debug("BaseTaskConfigController getAddGetModel");
-		
+	protected Map<String, Object> getAddGetModel(Map<String, Object> model) {		
 		List<String> menuList = new ArrayList<String>();
 		menuList.add("TaskConfig");
 		menuList.add(getConfigTypeStr());
@@ -72,10 +64,6 @@ public abstract class BaseConfigController<T extends BaseConfig> {
 	}
 	
 	protected Map<String, Object> getAddPostModel(Map<String, Object> model, T config) {
-		
-		logger.debug("BaseTaskConfigController getAddPostModel");
-		logger.debug(mGson.toJson(config));
-		
 		Map<String,String> data = new HashMap<String,String>();
 		data.put("errCode", "0");
 		data.put("errDesc","success");
@@ -94,8 +82,6 @@ public abstract class BaseConfigController<T extends BaseConfig> {
 	}
 	
 	protected Map<String, Object> getDelModel(Map<String, Object> model, T config) {
-		logger.debug("BaseTaskConfigController getDelModel");
-		logger.debug(mGson.toJson(config));
 		Map<String,String> data = new HashMap<String,String>();
 		data.put("errCode", "0");
 		data.put("errDesc","success");
