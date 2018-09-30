@@ -78,7 +78,7 @@ public abstract class BaseConfigRepository<T extends BaseConfig> {
 	}
 	
 	public int delConfig(T config) {
-		logger.info("AddConfig - " + mGson.toJson(config));
+		logger.info("DelConfig - " + mGson.toJson(config));
 		int row = -1;
 		try {
 			row =  jdbcTemplate.update(getDelSql(), getDelParams(config));
