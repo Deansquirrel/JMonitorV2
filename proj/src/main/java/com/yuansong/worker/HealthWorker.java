@@ -1,6 +1,7 @@
 package com.yuansong.worker;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -39,8 +40,14 @@ public class HealthWorker extends BaseWorkerAbstractImpl<HealthTaskConfig> {
     		sb.append(taskConfig.getMsgContent());
     	}
     	if(!HealthRecorder.isHealth()) {
-    		sb.append("\n").append("\n");
-    		sb.append(HealthRecorder.getHealthWarnMsg());
+    		sb.append("\n");
+    		Map<String, String> warMsg = HealthRecorder.getHealthWarnMsg();
+    		for(String title : warMsg.keySet()) {
+    			sb.append("\n");
+    			sb.append(title);
+    			sb.append("\n");
+    			sb.append(warMsg.get(title));
+    		}
 		}		
 		return sb.toString();
 	}
