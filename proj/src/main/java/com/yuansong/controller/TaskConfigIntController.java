@@ -68,8 +68,26 @@ public class TaskConfigIntController extends BaseConfigController<IntTaskConfig>
 		config.setDbPwd(pwd.trim());
 		config.setSearch(search.trim());
 		config.setCron(cron);
-		config.setCheckMax(Integer.valueOf(checkMax.trim()));
-		config.setCheckMin(Integer.valueOf(checkMin.trim()));
+		
+		int iCheckMax = -1;
+		int iCheckMin = -1;
+		try {
+			iCheckMax = Integer.valueOf(checkMax.trim());
+		}
+		catch(Exception ex) {
+			logger.warn("将字符串【" + checkMax +"】转换为Int时出错：" + ex.getMessage());
+			ex.printStackTrace();
+		}
+		try {
+			iCheckMin = Integer.valueOf(checkMin.trim());
+		}
+		catch(Exception ex) {
+			logger.warn("将字符串【" + checkMin +"】转换为Int时出错：" + ex.getMessage());
+			ex.printStackTrace();
+		}
+		
+		config.setCheckMax(iCheckMax);
+		config.setCheckMin(iCheckMin);
 		config.setMsgTitle(msgTitle);
 		config.setMsgContent(msgContent);
 		return new ModelAndView("responsePage", this.getAddPostModel(model, config));
