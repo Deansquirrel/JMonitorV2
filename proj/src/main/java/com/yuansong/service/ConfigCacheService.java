@@ -13,12 +13,14 @@ import com.yuansong.notify.DingNotify;
 import com.yuansong.notify.Notify;
 import com.yuansong.pojo.BaseNotifyConfig;
 import com.yuansong.pojo.BaseTaskConfig;
+import com.yuansong.pojo.CrmDzXfTestTaskConfig;
 import com.yuansong.pojo.DingNotifyConfig;
 import com.yuansong.pojo.HealthTaskConfig;
 import com.yuansong.pojo.IntTaskConfig;
 import com.yuansong.pojo.JiraSearchTaskConfig;
 import com.yuansong.pojo.WebStateTaskConfig;
 import com.yuansong.worker.BaseWorker;
+import com.yuansong.worker.CrmDzXfTestWorker;
 import com.yuansong.worker.HealthWorker;
 import com.yuansong.worker.IntWorker;
 import com.yuansong.worker.JiraSearchWorker;
@@ -52,6 +54,11 @@ public class ConfigCacheService {
 	@Autowired
 	private BaseConfigService<JiraSearchTaskConfig> mJiraSearchConfigService;
 	
+	//CrmDzTestConfig
+	private Map<String, CrmDzXfTestTaskConfig> mCrmDzXfTestConfigMap = null;
+	@Autowired
+	private BaseConfigService<CrmDzXfTestTaskConfig> mCrmDzXfTestTaskConfigService;
+	
 	//DingNotifyConfig
 	private Map<String, DingNotifyConfig> mDingConfigMap = null;
 	@Autowired
@@ -62,12 +69,14 @@ public class ConfigCacheService {
 		mHealthConfigMap = new HashMap<String, HealthTaskConfig>();
 		mWebStateConfigMap = new HashMap<String, WebStateTaskConfig>();
 		mJiraSearchConfigMap = new HashMap<String, JiraSearchTaskConfig>();
+		mCrmDzXfTestConfigMap = new HashMap<String, CrmDzXfTestTaskConfig>();
 		
 		taskConfigTypeList = new ArrayList<String>();
 		taskConfigTypeList.add("Int");
 		taskConfigTypeList.add("Health");
 		taskConfigTypeList.add("WebState");
 		taskConfigTypeList.add("JiraSearch");
+		taskConfigTypeList.add("CrmDzXfTest");
 		
 		mDingConfigMap = new HashMap<String, DingNotifyConfig>();
 		
@@ -101,6 +110,9 @@ public class ConfigCacheService {
 					break;
 				case "JiraSearch":
 					callBack.getConfigAndService(mJiraSearchConfigService, mJiraSearchConfigMap);
+					break;
+				case "CrmDzXfTest":
+					callBack.getConfigAndService(mCrmDzXfTestTaskConfigService, mCrmDzXfTestConfigMap);
 					break;
 				default:
 					String msg = "未配置【" + type + "】对应的设置和服务对象";
@@ -138,6 +150,8 @@ public class ConfigCacheService {
 				return new WebStateWorker((WebStateTaskConfig) config, getNotifyList());
 			case "JiraSearchTaskConfig":
 				return new JiraSearchWorker((JiraSearchTaskConfig) config, getNotifyList());
+			case "CrmDzXfTestTaskConfig":
+				return new CrmDzXfTestWorker((CrmDzXfTestTaskConfig) config,getNotifyList());
 			default:
 				throw new Exception("未定义Config类型对应的Worker【" + config.getClass().getSimpleName() +"】");
 		}

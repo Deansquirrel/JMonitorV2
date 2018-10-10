@@ -7,6 +7,7 @@
 <c:if test="${fn:contains(menulist,'Health')}" var="cHealth"></c:if>
 <c:if test="${fn:contains(menulist,'WebState')}" var="cWebState"></c:if>
 <c:if test="${fn:contains(menulist,'JiraSearch')}" var="cJiraSearch"></c:if>
+<c:if test="${fn:contains(menulist,'CrmDzXfTest')}" var="cCrmDzXfTest"></c:if>
 <c:if test="${fn:contains(menulist,'Ding')}" var="cDing"></c:if>
 <c:if test="${fn:contains(menulist,'List')}" var="cList"></c:if>
 <c:if test="${fn:contains(menulist,'Add')}" var="cAdd"></c:if>
@@ -170,6 +171,42 @@
 						</c:if>
 						<c:if test="${!(cHealth && cAdd) }">
 							<li><a id="ataskhealthadd" href="${urlStr }">Add</a></li>
+						</c:if>
+					</ul>
+				</div>
+			</li>
+			
+			<li class="panel">
+				<c:if test="${cCrmDzXfTest }">
+					<a id="acrmdzxftest" href="#crmdzxftest" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="active" aria-expanded="true">
+				</c:if>
+				<c:if test="${!cCrmDzXfTest }">
+					<a id="acrmdzxftest" href="#crmdzxftest" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed">
+				</c:if>
+					<span class="title">CrmDzXfTest</span>
+					<i class="icon-submenu ti-angle-left"></i>
+				</a>
+				<c:if test="${cCrmDzXfTest }">
+					<div id="crmdzxftest" class="collapse in">
+				</c:if>
+				<c:if test="${!cCrmDzXfTest }">
+					<div id="crmdzxftest" class="collapse">
+				</c:if>
+					<ul class="submenu">
+						<c:url var="urlStr" value="/TaskConfig/CrmDzXfTest/List" />
+						<c:if test="${cCrmDzXfTest && cList }">
+							<li><a href="${urlStr }" class="active">List</a></li>
+						</c:if>
+						<c:if test="${!(cCrmDzXfTest && cList) }">
+							<li><a href="${urlStr }">List</a></li>
+						</c:if>
+
+						<c:url var="urlStr" value="/TaskConfig/CrmDzXfTest/Add" />
+						<c:if test="${cCrmDzXfTest && cAdd }">
+							<li><a href="${urlStr }" class="active">Add</a></li>
+						</c:if>
+						<c:if test="${!(cCrmDzXfTest && cAdd) }">
+							<li><a href="${urlStr }">Add</a></li>
 						</c:if>
 					</ul>
 				</div>

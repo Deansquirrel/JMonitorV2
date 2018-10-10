@@ -85,6 +85,21 @@
 		<put-attribute name="content" value="/WEB-INF/view/TaskConfig/TaskConfigHealthDetail.jsp" />
 		<put-attribute name="menu" value="/layouts/menu.jsp" />
 	</definition>
+	
+	<definition name="TaskConfigCrmDzXfTestList" extends="template-base-web">
+		<put-attribute name="content" value="/WEB-INF/view/TaskConfig/TaskConfigCrmDzXfTestList.jsp" />
+		<put-attribute name="menu" value="/layouts/menu.jsp" />
+	</definition>
+	
+	<definition name="TaskConfigCrmDzXfTestAdd" extends="template-base-web">
+		<put-attribute name="content" value="/WEB-INF/view/TaskConfig/TaskConfigCrmDzXfTestAdd.jsp" />
+		<put-attribute name="menu" value="/layouts/menu.jsp" />
+	</definition>
+	
+	<definition name="TaskConfigCrmDzXfTestDetail" extends="template-base-web">
+		<put-attribute name="content" value="/WEB-INF/view/TaskConfig/TaskConfigCrmDzXfTestDetail.jsp" />
+		<put-attribute name="menu" value="/layouts/menu.jsp" />
+	</definition>
 
 
 	<definition name="MessageSenderConfigDingList" extends="template-base-web">
