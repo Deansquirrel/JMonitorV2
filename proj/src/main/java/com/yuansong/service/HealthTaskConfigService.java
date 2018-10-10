@@ -17,6 +17,8 @@ public class HealthTaskConfigService extends BaseConfigService<HealthTaskConfig>
 
 	@Override
 	public String check(HealthTaskConfig config) {
+		if(config.getId().trim().equals("")) return "ID不允许为空";
+		if(config.getCron().trim().equals("")) return "Cron不允许为空";
 		return taskManagerService.testConfig(config);
 	}
 

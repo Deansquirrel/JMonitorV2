@@ -17,6 +17,9 @@ public class WebStateTaskConfigService extends BaseConfigService<WebStateTaskCon
 
 	@Override
 	public String check(WebStateTaskConfig config) {
+		if(config.getId().trim().equals("")) return "ID不允许为空";
+		if(config.getUrl().trim().equals("")) return "Url不允许为空";
+		if(config.getCron().trim().equals("")) return "Cron不允许为空";
 		return taskManagerService.testConfig(config);
 	}
 

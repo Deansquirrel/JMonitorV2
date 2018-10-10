@@ -14,6 +14,8 @@ public class DingNotifyConfigService extends BaseConfigService<DingNotifyConfig>
 
 	@Override
 	public String check(DingNotifyConfig config) {
+		if(config.getId().trim().equals("")) return "ID不允许为空";
+		if(config.getRobotToken().trim().equals("")) return "RobotToken不允许为空";
 		return "";
 	}
 
