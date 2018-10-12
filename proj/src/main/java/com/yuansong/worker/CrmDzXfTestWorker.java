@@ -130,7 +130,7 @@ public class CrmDzXfTestWorker extends BaseWorkerAbstractImpl<CrmDzXfTestTaskCon
 		}
 		
 		if(subException == null && httpCode == 200 && (endTime - startTime < 5 * 1000)) {
-			logger.debug(config.getAddress() + " - " + String.valueOf(endTime - startTime));
+//			logger.debug(config.getAddress() + " - " + String.valueOf(endTime - startTime));
 			return "";
 		}
 		else {
