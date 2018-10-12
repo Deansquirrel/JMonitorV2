@@ -1,6 +1,7 @@
 package com.yuansong.worker;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -30,23 +31,11 @@ public class CrmDzXfTestWorker extends BaseWorkerAbstractImpl<CrmDzXfTestTaskCon
 	protected String check() {
 		CrmDzXfTestTaskConfig config = getConfig();
 		String msg = "";
-		try {
-			msg = subXfTest(config);			
-		}
-		catch(Exception ex) {
-			logger.warn(ex.getMessage());
-			ex.printStackTrace();
-			StringBuilder sb = new StringBuilder();
-			sb.append("定制服务消费接口测试遇到异常：");
-			sb.append("\n").append(config.getAddress());
-			sb.append("\n").append(ex.getMessage());
-			return sb.toString();
-		}
-		
+		msg = subXfTest(config);
 		return msg;
 	}
 	
-	private String subXfTest(CrmDzXfTestTaskConfig config) throws Exception {
+	private String subXfTest(CrmDzXfTestTaskConfig config) {
 		
 		Map<String, Map<String, Object>> data = new HashMap<String, Map<String, Object>>();
 		
@@ -81,6 +70,8 @@ public class CrmDzXfTestWorker extends BaseWorkerAbstractImpl<CrmDzXfTestTaskCon
 		long startTime = 0;
 		long endTime = System.currentTimeMillis();
 		int httpCode = -1;
+		
+		Exception subException = null;
 		
 		try {
 			startTime = System.currentTimeMillis();
@@ -119,27 +110,32 @@ public class CrmDzXfTestWorker extends BaseWorkerAbstractImpl<CrmDzXfTestTaskCon
 	        endTime = System.currentTimeMillis();
 		}
 		catch(Exception ex) {
-			throw ex;
+			subException = ex;
 		}
 		finally {
 			if(out != null) {
-				out.close();
+				try {
+					out.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			if(in != null) {
-				in.close();
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		
-		logger.debug(config.getAddress());
-		logger.debug(httpCode);
-		logger.debug(endTime - startTime);
-		
-		if(httpCode == 200 && (endTime - startTime < 5 * 1000)) {
+		if(subException == null && httpCode == 200 && (endTime - startTime < 5 * 1000)) {
+			logger.debug(config.getAddress() + " - " + String.valueOf(endTime - startTime));
 			return "";
 		}
 		else {
 			StringBuilder sb = new StringBuilder();
-			sb.append("定制服务消费接口测试：");
+			sb.append("定制服务消费接口测试");
 			if(!config.getMsgTitle().equals("")) {
 				sb.append("\n").append(config.getMsgTitle());
 			}
@@ -147,9 +143,20 @@ public class CrmDzXfTestWorker extends BaseWorkerAbstractImpl<CrmDzXfTestTaskCon
 				sb.append("\n").append(config.getMsgContent());
 			}
 			sb.append("\n").append(config.getAddress());
-			sb.append("\n").append("返回码：").append(String.valueOf(httpCode));
-			sb.append("\n").append("用时：").append(String.valueOf(endTime - startTime));
-			
+			logger.debug(config.getAddress());
+			if(subException != null) {
+				logger.warn(subException.getMessage());
+				subException.printStackTrace();
+				
+				sb.append("\n").append(subException.getMessage());
+			}
+			else {
+				logger.debug(httpCode);
+				logger.debug(endTime - startTime);
+				
+				sb.append("\n").append("返回码：").append(String.valueOf(httpCode));
+				sb.append("\n").append("用时：").append(String.valueOf(endTime - startTime));				
+			}
 			return sb.toString();
 		}
 	}
