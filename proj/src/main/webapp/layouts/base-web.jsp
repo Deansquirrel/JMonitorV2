@@ -93,7 +93,7 @@
 
 		<footer>
 			<div class="container-fluid">
-				<p class="copyright">JMonitor 1.0.0.0 Build20181010</p>
+				<p class="copyright">JMonitor 1.0.0.0 Build00000000</p>
 			</div>
 		</footer>
 	</div>
