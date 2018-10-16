@@ -1,10 +1,9 @@
 package com.yuansong.worker;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.InvalidResultSetAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -36,13 +35,22 @@ public class IntWorker extends BaseWorkerAbstractImpl<IntTaskConfig> {
 		try {
 			jdbcTemplate = getJdbcTemplate();
 			value = jdbcTemplate.queryForObject(taskConfig.getSearch(), Integer.class);
-		}catch (InvalidResultSetAccessException e){
-			e.printStackTrace();
-			return e.getMessage();
-		}catch (DataAccessException e){
-			e.printStackTrace();
-			return taskConfig.getMsgTitle() + "\n" + e.getMessage();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			StringBuilder sb = new StringBuilder();
+			if(taskConfig.getMsgTitle() != null && !taskConfig.getMsgTitle().equals("")) {
+				sb.append(taskConfig.getMsgTitle()).append("\n");
+			}
+			sb.append(ex.getMessage());
+			return sb.toString();
 		}
+//		}catch (InvalidResultSetAccessException e){
+//			e.printStackTrace();
+//			return e.getMessage();
+//		}catch (DataAccessException e){
+//			e.printStackTrace();
+//			return taskConfig.getMsgTitle() + "\n" + e.getMessage();
+//		}
 		
 		
 		if(value <= getConfig().getCheckMin() || value >= taskConfig.getCheckMax()) {
@@ -52,6 +60,25 @@ public class IntWorker extends BaseWorkerAbstractImpl<IntTaskConfig> {
 			msg = msg.replace("Min", String.valueOf(taskConfig.getCheckMin()));
 			if(!taskConfig.getMsgTitle().equals("")) {
 				msg = taskConfig.getMsgTitle() + "\n" + msg; 
+			}
+			if(taskConfig.getMsgSearch() != null && !taskConfig.getMsgSearch().equals("")) {
+				try {
+					jdbcTemplate = getJdbcTemplate();
+					List<Map<String, Object>> list = jdbcTemplate.queryForList(taskConfig.getMsgSearch());
+					for(Map<String, Object> msgData : list) {
+						msg = msg + "\n";
+						msg = msg + "--------------------";
+						for(String key : msgData.keySet()) {
+							msg = msg + "\n";
+							msg = msg + key + " - " + String.valueOf(msgData.get(key));
+						}
+					}
+				}catch(Exception ex) {
+					ex.printStackTrace();
+					msg = msg + "\n" + "--------------------";
+					msg = msg + "\n" + "查询详细提示信息时遇到错误";
+					msg = msg + "\n" + ex.getMessage();
+				}
 			}
 			return msg;
 		}

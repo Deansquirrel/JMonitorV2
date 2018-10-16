@@ -74,7 +74,13 @@ public abstract class BaseConfigController<T extends BaseConfig> {
 			data.put("errDesc",check);
 		}
 		else {
-			getConfigService().addConfig(config);
+			try {
+				getConfigService().addConfig(config);				
+			}catch(Exception ex) {
+				data.put("errCode", "1");
+				data.put("errDesc",ex.getMessage());				
+				ex.printStackTrace();
+			}
 		}
 		
 		model.put("info", mGson.toJson(data));

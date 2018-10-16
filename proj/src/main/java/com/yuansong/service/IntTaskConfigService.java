@@ -22,7 +22,6 @@ public class IntTaskConfigService extends BaseConfigService<IntTaskConfig> {
 		if(config.getPort().trim().equals("")) return "Port不允许为空";
 		if(config.getDbName().trim().equals("")) return "DbName不允许为空";
 		if(config.getDbUser().trim().equals("")) return "DbUser不允许为空";
-		if(config.getDbPwd().trim().equals("")) return "DbPwd不允许为空";
 		if(config.getPort().trim().equals("")) return "Port不允许为空";
 		if(config.getSearch().trim().equals("")) return "Search不允许为空";
 		if(config.getCron().trim().equals("")) return "Cron不允许为空";
