@@ -75,7 +75,8 @@ public class IntWorker extends BaseWorkerAbstractImpl<IntTaskConfig> {
 					}
 				}catch(Exception ex) {
 					ex.printStackTrace();
-					msg = msg + "\n" + "\n" + "查询详细提示信息时遇到错误";
+					msg = msg + "\n" + "--------------------";
+					msg = msg + "\n" + "查询详细提示信息时遇到错误";
 					msg = msg + "\n" + ex.getMessage();
 				}
 			}
