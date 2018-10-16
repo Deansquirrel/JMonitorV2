@@ -182,6 +182,8 @@
 		$("#i-checkmin").val("");
 		$("#i-msgtitle").val("");
 		$("#i-msgcontent").val("");
+		$("#i-msgsearch").val("");
+		
 		
 		$("#btn-add").attr("disabled",false);
 		$("#i-title").focus();
