@@ -12,6 +12,8 @@ public class IntTaskConfig extends BaseTaskConfig {
 	private int checkMax;
 	private int checkMin;
 	
+	private String msgSearch;
+	
 	public String getServer() {
 		return server;
 	}
@@ -60,6 +62,12 @@ public class IntTaskConfig extends BaseTaskConfig {
 	}
 	public void setDbPwd(String dbPwd) {
 		this.dbPwd = dbPwd;
+	}
+	public String getMsgSearch() {
+		return msgSearch;
+	}
+	public void setMsgSearch(String msgSearch) {
+		this.msgSearch = msgSearch;
 	}
 
 }

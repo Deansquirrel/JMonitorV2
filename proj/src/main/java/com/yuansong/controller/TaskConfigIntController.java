@@ -53,6 +53,7 @@ public class TaskConfigIntController extends BaseConfigController<IntTaskConfig>
 			@RequestParam("i-checkmin") String checkMin,
 			@RequestParam("i-msgtitle") String msgTitle,
 			@RequestParam("i-msgcontent") String msgContent,
+			@RequestParam("i-msgsearch") String msgSearch,
 			Map<String, Object> model) {
 		
 		logger.debug("TaskConfigIntController configAddAction");
@@ -90,6 +91,8 @@ public class TaskConfigIntController extends BaseConfigController<IntTaskConfig>
 		config.setCheckMin(iCheckMin);
 		config.setMsgTitle(msgTitle);
 		config.setMsgContent(msgContent);
+		config.setMsgSearch(msgSearch);
+		
 		return new ModelAndView("responsePage", this.getAddPostModel(model, config));
 	}
 	
