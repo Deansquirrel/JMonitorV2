@@ -184,7 +184,6 @@
 		$("#i-msgcontent").val("");
 		$("#i-msgsearch").val("");
 		
-		
 		$("#btn-add").attr("disabled",false);
 		$("#i-title").focus();
 	}
