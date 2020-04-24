@@ -34,13 +34,7 @@ public abstract class BaseConfigRepository<T extends BaseConfig> {
 	protected abstract RowMapper<T> getRowMapper();
 	
 	public T getConfig(String id) {
-		List<T> list = null;
-		try {
-			list = jdbcTemplate.query(getGetSql(), new Object[] {id}, getRowMapper());			
-		}
-		catch(Exception ex) {
-			throw new RuntimeException(ex.getMessage());
-		}
+		List<T> list = jdbcTemplate.query(getGetSql(), new Object[] {id}, getRowMapper());			
 		if(list.size() == 1 ) {
 			return list.get(0);
 		}
@@ -55,37 +49,16 @@ public abstract class BaseConfigRepository<T extends BaseConfig> {
 	}
 	
 	public List<T> getConfigList(){
-		List<T> list =null;
-		try{
-			list = jdbcTemplate.query(getGetListSql(), getRowMapper());
-		}
-		catch(Exception ex) {
-			throw new RuntimeException(ex.getMessage());
-		}
-		return list;
+		return jdbcTemplate.query(getGetListSql(), getRowMapper());
 	}
 	
 	public int addConfig(T config) {
 		logger.info("AddConfig - " + mGson.toJson(config));
-		int row = -1;
-		try {
-			row = jdbcTemplate.update(getAddSql(), getAddParams(config));
-		}
-		catch(Exception ex) {
-			throw new RuntimeException(ex.getMessage());
-		}
-		return row;
+		return jdbcTemplate.update(getAddSql(), getAddParams(config));
 	}
 	
 	public int delConfig(T config) {
 		logger.info("DelConfig - " + mGson.toJson(config));
-		int row = -1;
-		try {
-			row =  jdbcTemplate.update(getDelSql(), getDelParams(config));
-		}
-		catch(Exception ex) {
-			throw new RuntimeException(ex.getMessage());
-		}
-		return row;
+		return  jdbcTemplate.update(getDelSql(), getDelParams(config));
 	}
 }

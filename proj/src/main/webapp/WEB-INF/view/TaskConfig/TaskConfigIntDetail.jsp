@@ -70,6 +70,10 @@
 				<label class="col-sm-2 control-label">MsgContent</label>
 				<label class="col-sm-10 control-label" style="text-align: left;">${config.msgContent }</label>
 			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">MsgSearch</label>
+				<label class="col-sm-10 control-label" style="text-align: left;">${config.msgSearch }</label>
+			</div>
 		</form>
 		
 	</div>

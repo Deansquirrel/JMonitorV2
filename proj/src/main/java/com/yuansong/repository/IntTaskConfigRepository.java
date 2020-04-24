@@ -22,7 +22,8 @@ public class IntTaskConfigRepository extends BaseConfigRepository<IntTaskConfig>
 			"      ,[FCheckMax]" + 
 			"      ,[FCheckMin]" + 
 			"      ,[FMsgTitle]" + 
-			"      ,[FMsgContent]" + 
+			"      ,[FMsgContent]" +
+			"      ,[FMsgSearch]" +
 			"      ,[FRemark]" + 
 			"      ,[FTitle]" + 
 			"  FROM [IntTaskConfig]" + 
@@ -41,6 +42,7 @@ public class IntTaskConfigRepository extends BaseConfigRepository<IntTaskConfig>
 			"      ,[FCheckMin]" + 
 			"      ,[FMsgTitle]" + 
 			"      ,[FMsgContent]" + 
+			"      ,[FMsgSearch]" +
 			"      ,[FRemark]" + 
 			"      ,[FTitle]" + 
 			"  FROM [IntTaskConfig]";
@@ -59,10 +61,11 @@ public class IntTaskConfigRepository extends BaseConfigRepository<IntTaskConfig>
 			"           ,[FCheckMin]" + 
 			"           ,[FMsgTitle]" + 
 			"           ,[FMsgContent]" + 
+			"           ,[FMsgSearch]" +
 			"           ,[FRemark]" + 
 			"           ,[FTitle])" + 
 			"     VALUES" + 
-			"           (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			"           (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	private static final String DEL_SQL = ""
 			+ "DELETE FROM [IntTaskConfig]" + 
@@ -98,6 +101,7 @@ public class IntTaskConfigRepository extends BaseConfigRepository<IntTaskConfig>
 				config.getCheckMin(),
 				config.getMsgTitle(),
 				config.getMsgContent(),
+				config.getMsgSearch(),
 				config.getRemark(),
 				config.getTitle()
 		};

@@ -86,6 +86,12 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-sm-2 control-label">MsgSearch</label>
+				<div class="col-sm-10">
+					<input id="i-msgsearch" type="text" class="form-control" name="i-msgsearch"  placeholder="MsgSearch">
+				</div>
+			</div>
+			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="button" id="btn-add" class="btn btn-primary btn-block">Submit</button>
 				</div>
@@ -176,6 +182,7 @@
 		$("#i-checkmin").val("");
 		$("#i-msgtitle").val("");
 		$("#i-msgcontent").val("");
+		$("#i-msgsearch").val("");
 		
 		$("#btn-add").attr("disabled",false);
 		$("#i-title").focus();
